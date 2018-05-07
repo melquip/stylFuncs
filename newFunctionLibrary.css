@@ -1,0 +1,11 @@
+/*for n in 1..1
+	for fontType in settings.fontTypes
+		key = 'font'+n
+		p('key: ' + key)
+		push(settings.fonts, { 
+			type: fontType
+			name: ''
+			path: ''
+			extensions: default
+			alt: ''
+		})*/

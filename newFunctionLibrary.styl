@@ -1,0 +1,30 @@
+use("plugins.js");
+default = 'default'
+
+settings = {
+	"fontTypes": {
+		L: 'light'
+		R: 'regular'
+		B: 'bold'
+	}
+	"fonts": objFonts()
+	"customReset": true
+	"containers": default
+	"colors": {
+	
+	}
+}
+/*for n in 1..1
+	for fontType in settings.fontTypes
+		key = 'font'+n
+		p('key: ' + key)
+		push(settings.fonts, { 
+			type: fontType
+			name: ''
+			path: ''
+			extensions: default
+			alt: ''
+		})*/
+		
+	
+p('settings.fonts',settings.fonts)

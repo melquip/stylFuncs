@@ -1,0 +1,57 @@
+/*
+default = 'default'
+s = settings
+for n in 1..10
+	for t in s.fontTypes
+		s.fonts["font"+{n}][""+{t}] = { 
+			name: 'hi'
+			path: ''
+			extensions: default
+			alt: default
+		}
+*/
+
+
+	
+
+/*'Amanda' '../Amanda' R (ttf woff) "'Open Sans', 'Times New Roman', sans-serif"
+	font2: 'Anna' '../Anna' L default
+	font3: 'Asdrubal' '../Asdrubal' B default
+	font4: '' '' N default*/
+/*
+customReset()
+	*
+		margin 0
+		padding 0
+		box-sizing border-box
+		
+
+
+execSettings()
+	$containers = 320 280, 360 320, 480 440, 720 640, 1024 840, 1280 1024, 1440 1170
+	if settings.customReset
+		customReset()
+	for i in 1..4
+		set-font(settings['font'+i])
+	
+
+set-font()
+	$extensions = arguments[3]==default?(woff woff2):(arguments[3])
+	if arguments[0] != '' AND arguments[1] != ''
+		$name = arguments[0]
+		$sourcePath = arguments[1]
+		@font-face
+			font-family $name
+			$fullPath = ''
+			for $extension in $extensions
+				$extension1 = $extension
+				$extension1 = "ttf" unless $extension != "truetype"
+				$fullPath += 'url("' + $sourcePath + '.' + $extension1 + '") format("' + $extension + '")'
+				unless $extension == $extensions[length($extensions)-1]
+					$fullPath += ', '
+			src unquote($fullPath)
+			font-weight normal
+			font-style normal
+
+execSettings()
+*/
