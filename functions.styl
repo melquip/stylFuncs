@@ -205,7 +205,10 @@ display(type, args...)
  * New syntax for browsers like Google Chrome.
  * Plus a translation to the old syntax, if possible.
  */
- 
+
+writing-mode()
+	vendor('writing-mode', arguments, only: webkit ms official)
+
 //
 // 5. Ordering and Orientation
 //    - http://www.w3.org/TR/css3-flexbox/#ordering-and-orientation
@@ -1015,7 +1018,7 @@ border-image()
  */
 
 transition()
-	vendor('transition', arguments)
+	vendor('transition', arguments, only: webkit moz o official)
 
 /*
  * Vendor "transition-property" support.
@@ -2070,8 +2073,14 @@ flexible($basis, $space = null, $grow = 1, $shrink = 1)
 		$space = defaultUnit(round((($space*($ratio - 1)) / $ratio), 2))
 		$resolved_basis = unquote('calc(' + $resolved_basis + ' - ' + $space + ')')
 		
-	flex $grow $shrink $resolved_basis
-	max-width $resolved_basis
+	if ($space is not 'unit' and $space == true) or $grow == '!'
+		$grow = 1
+		flex $grow $shrink $resolved_basis!important
+		max-width $resolved_basis!important
+	else
+		flex $grow $shrink $resolved_basis
+		max-width $resolved_basis
+		
 	
 	
 simplify($measure, $screenWidth, $valUnit = '%')
@@ -2112,6 +2121,8 @@ SUPPORT FOR IE 10? IE11 IS OK --> rule out IE9...
 				vertical-align unquote('top\9')
 */
 
+
+// todo: set default order on media cache variable instead of this hammer fix
 mediaFix()
 	body
 		+media(320)
@@ -2125,6 +2136,8 @@ mediaFix()
 		+media(720)
 			/* */
 		+media(768)
+			/* */
+		+media(960)
 			/* */
 		+media(1024)
 			/* */
@@ -2484,6 +2497,7 @@ defaultUnit($measure, $unit = 'px')
 */
 
 flickity()
+	
 	.flickity-enabled
 		position relative
 		&:focus
@@ -2577,7 +2591,19 @@ flickity()
 		
 			&.is-selected
 				opacity 1
+	
+	.flickity-fade
+		.flickity-slider
+			transform none !important
+			.fadeSlide
+				left 0 !important
+				opacity 0
+				transition opacity .33s ease-in-out
+				&.is-selected
+					opacity 1
 		
+				
+// these dont work with "+media"
 hover()
 	&:hover
 		{block}
